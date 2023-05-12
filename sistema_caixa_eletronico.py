@@ -3,11 +3,13 @@ saldo = 5000
 saque = []
 deposito = []
 while True:
+    print('{:^40}'.format('*BANCO TABAJARA*'))
     print('''[1] - Saque
 [2] - Extrato
 [3] - Deposito
 [4] - Sair''')
-    operação = int(input('Digite o numero da operação que deseja fazer: '))
+    print()
+    operação = int(input('Digite o numero da operação que deseja realiza: '))
     if operação == 1:
         saque.append(int(input('Digite o valor do saque: ')))
         print(f'Saque de R${saque[-1]} realizado com sucesso.')
@@ -26,6 +28,7 @@ while True:
         deposito.append(int(input('Digite o valor de deposito: ')))
         print(f'Deposito de R${deposito[-1]} realizado com sucesso')
         saldo = saldo + deposito[-1]
+        print('-' *40)
     elif operação == 4:
         print('SAINDO...')
         break
