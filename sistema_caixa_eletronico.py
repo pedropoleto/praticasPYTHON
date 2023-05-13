@@ -1,7 +1,9 @@
 from time import sleep
-saldo = 5000
+saldo = 0
 saque = []
 deposito = []
+qntd_saque = 0
+limite_saque = 3
 while True:
     print('{:^40}'.format('*BANCO TABAJARA*'))
     print('''[1] - Saque
@@ -14,6 +16,9 @@ while True:
         saque.append(int(input('Digite o valor do saque: ')))
         print(f'Saque de R${saque[-1]} realizado com sucesso.')
         saldo = saldo - saque[-1]
+        qntd_saque = qntd_saque + 1
+        if qntd_saque == limite_saque:
+            print('Você ultrapassou o limite de  3 saques')
     elif operação == 2:
         print('-' *40)
         print('{:^40}'.format("GERANDO EXTRATO"))
@@ -22,10 +27,14 @@ while True:
         for v in saque:
             print(f'Saque realizado no valor de R${v}')
         for v in deposito:
-            print(f'Deposito realizado no valor de R${v}')
+            if v > 0:
+                print(f'Deposito realizado no valor de R${v}')
         print('-' *40)
     elif operação == 3:
         deposito.append(int(input('Digite o valor de deposito: ')))
+        while deposito[-1] < 0:
+            print('Valor invalido. Tente novamente.')
+            deposito.append(int(input('Digite o valor de deposito: ')))
         print(f'Deposito de R${deposito[-1]} realizado com sucesso')
         saldo = saldo + deposito[-1]
         print('-' *40)
