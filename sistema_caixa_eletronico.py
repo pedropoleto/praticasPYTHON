@@ -4,6 +4,7 @@ saque = []
 deposito = []
 qntd_saque = 0
 limite_saque = 3
+soma_saque = 0
 while True:
     print('{:^40}'.format('*BANCO TABAJARA*'))
     print('''[1] - Saque
@@ -14,11 +15,17 @@ while True:
     operação = int(input('Digite o numero da operação que deseja realiza: '))
     if operação == 1:
         saque.append(int(input('Digite o valor do saque: ')))
-        print(f'Saque de R${saque[-1]} realizado com sucesso.')
-        saldo = saldo - saque[-1]
-        qntd_saque = qntd_saque + 1
-        if qntd_saque == limite_saque:
+        if saque[-1] > 500 or soma_saque > 500:
+            print('Seu limite diario de saque é R$500')
+            if saldo > 0 and saque[-1] <= 500:
+                print(f'Saque de R${saque[-1]} realizado com sucesso.')
+                saldo = saldo - saque[-1]
+                qntd_saque = qntd_saque + 1
+        if saldo <= 0:
+            print('Você não tem saldo suficiente para realizar esta operação!')
+        if qntd_saque > limite_saque:
             print('Você ultrapassou o limite de  3 saques')
+        soma_saque = sum(saque)
     elif operação == 2:
         print('-' *40)
         print('{:^40}'.format("GERANDO EXTRATO"))
